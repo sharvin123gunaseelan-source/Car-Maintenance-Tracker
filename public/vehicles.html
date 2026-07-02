@@ -1,0 +1,17 @@
+<h1>Vehicles List</h1>
+<table border="1">
+    <tr>
+        <th>Car Name</th>
+        <th>Plate Number</th>
+        <th>Model</th>
+        <th>Year</th>
+    </tr>
+    <% vehicles.forEach(vehicle => { %>
+    <tr>
+        <td><%= vehicle.car_name %></td>
+        <td><%= vehicle.plate_number %></td>
+        <td><%= vehicle.model %></td>
+        <td><%= vehicle.year %></td>
+    </tr>
+    <% }) %>
+</table>

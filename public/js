@@ -1,0 +1,18 @@
+req.session.userId =
+user.id;
+
+res.redirect("/dashboard");
+res.send("Login Successful");
+app.get("/dashboard",(req,res)=>{
+    res.sendFile(
+        __dirname +
+        "/public/dashboard.html"
+    );
+});
+
+app.get("/vehicles",(req,res)=>{
+res.sendFile(
+__dirname +
+"/public/vehicles.html"
+);
+});

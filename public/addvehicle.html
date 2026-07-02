@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Add Vehicle</title>
+
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>🚗 Add New Vehicle</h1>
+
+<form action="/addVehicle" method="POST">
+
+<input
+type="text"
+name="car_name"
+placeholder="Car Name"
+required>
+
+<input
+type="text"
+name="plate_number"
+placeholder="Plate Number"
+required>
+
+<input
+type="text"
+name="model"
+placeholder="Model"
+required>
+
+<input
+type="number"
+name="year"
+placeholder="Year"
+required>
+
+<button type="submit">
+Add Vehicle
+</button>
+
+</form>
+
+<br>
+
+<a href="/dashboard">⬅ Back to Dashboard</a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
