@@ -8,7 +8,7 @@
 
 /* Body */
 body{
-    background:#f4f7fb;
+    background: #000;;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -26,10 +26,10 @@ body{
 /* Card */
 .card{
     width:500px;
-    background:white;
-    padding:35px;
+    background:#ffffff;
+    padding:30px;
     border-radius:15px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    box-shadow:0 0 25px rgba(255,255,255,0.15);
     transition:0.3s;
 }
 
@@ -41,8 +41,8 @@ body{
 /* Headings */
 h1{
     text-align:center;
-    color:#2c3e50;
-    margin-bottom:25px;
+    color:#1f2937;
+    margin-bottom:20px;
 }
 
 /* Paragraph */
@@ -56,7 +56,7 @@ input{
     width:100%;
     padding:12px;
     margin:10px 0;
-    border:1px solid #ccc;
+    border:1px solid #d1d5db;
     border-radius:8px;
     font-size:16px;
 }
