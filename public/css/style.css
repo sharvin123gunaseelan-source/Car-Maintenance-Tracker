@@ -8,12 +8,11 @@
 
 /* Body */
 body{
-    background:#000;
-    margin:0;
-    padding:30px;
+    background: #000;;
     display:flex;
     justify-content:center;
-    align-items:flex-start;
+    align-items:center;
+    min-height:100vh;
 }
 
 /* Main Container */
@@ -26,14 +25,12 @@ body{
 
 /* Card */
 .card{
-    width:95%;
-    max-width:1200px;
-    background:white;
+    width:500px;
+    background:#ffffff;
     padding:30px;
-    border-radius:10px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+    border-radius:15px;
+    box-shadow:0 0 25px rgba(255,255,255,0.15);
     transition:0.3s;
-    overflow-x:auto;
 }
 
 .card:hover{
@@ -94,13 +91,13 @@ li{
 
 /* Links */
 a{
-    display:inline-block;
+    display:block;
     text-decoration:none;
     background:#3498db;
     color:white;
-    padding:8px 12px;
+    padding:12px;
     text-align:center;
-    border-radius:6px;
+    border-radius:8px;
     transition:.3s;
 }
 
