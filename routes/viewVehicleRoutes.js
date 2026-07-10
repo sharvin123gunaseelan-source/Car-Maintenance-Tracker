@@ -6,10 +6,23 @@ const db = require("../config/db");
 router.get("/vehicles", (req, res) => {
 
     const userId = req.session.userId;
+const role = req.session.role;
 
-db.query(
-    "SELECT * FROM vehicles WHERE user_id = ?",
-    [userId], (err, results) => {
+let sql;
+let values = [];
+
+if (role === "admin") {
+
+    sql = "SELECT * FROM vehicles";
+
+} else {
+
+    sql = "SELECT * FROM vehicles WHERE user_id = ?";
+    values = [userId];
+
+}
+
+db.query(sql, values, (err, results) => {
 
         if (err) {
             console.log(err);
@@ -34,9 +47,12 @@ db.query(
 
 <div class="container">
 
-<div class="card">
+<div class="card" style="width:1200px; overflow-x:auto;">
 
 <h1>🚗 Vehicle List</h1>
+<p style="text-align:center;">
+Logged in as: <b>${role.toUpperCase()}</b>
+</p>
 
 <form action="/searchVehicle">
 
@@ -53,7 +69,7 @@ Search
 
 <br>
 
-<table>
+<table style="width:100%; border-collapse:collapse;">
 
 <tr>
 
@@ -85,19 +101,18 @@ Search
                 <td>${vehicle.model}</td>
                 <td>${vehicle.year}</td>
 
-                <td>
-                    <a href="/editVehicle/${vehicle.vehicle_id}">
-                        Edit
-                    </a>
-                </td>
+                <td style="padding:8px;">
+    <a href="/editVehicle/${vehicle.vehicle_id}">
+        Edit
+    </a>
+</td>
 
-                <td>
-                    <a
-href="/deleteVehicle/${vehicle.vehicle_id}"
-onclick="return confirm('Delete this vehicle?')">
-Delete
-</a>
-                </td>
+<td style="padding:8px;">
+    <a href="/deleteVehicle/${vehicle.vehicle_id}"
+       onclick="return confirm('Delete this vehicle?')">
+       Delete
+    </a>
+</td>
             </tr>
             `;
 

@@ -37,13 +37,13 @@ return res.send(
         await bcrypt.hash(password,10);
 
         const sql =
-        `INSERT INTO users
-        (name,email,password)
-        VALUES (?,?,?)`;
+`INSERT INTO users
+(name,email,password,role)
+VALUES (?,?,?,?)`;
 
         db.query(
             sql,
-            [name,email,hashedPassword],
+            [name,email,hashedPassword,'user'],
             (err,result)=>{
 
                 if(err){
@@ -91,11 +91,13 @@ router.post("/login", (req, res) => {
 
         if (match) {
 
-            req.session.userId = user.id;
+    req.session.userId = user.id;
+    req.session.role = user.role;
+    req.session.userName = user.name;
 
-            return res.redirect("/dashboard");
+    return res.redirect("/dashboard");
 
-        } else {
+} else {
 
             return res.send("Wrong Password");
 

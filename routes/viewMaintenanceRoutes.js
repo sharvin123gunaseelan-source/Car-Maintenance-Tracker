@@ -4,14 +4,35 @@ const db = require("../config/db");
 
 router.get("/maintenance",(req,res)=>{
 
-    db.query(
-        `SELECT m.*
-FROM maintenance_records m
-JOIN vehicles v
-ON m.vehicle_id = v.vehicle_id
-WHERE v.user_id = ?`,
-        [req.session.userId],
-        (err,results)=>{
+    const role = req.session.role;
+const userId = req.session.userId;
+
+let sql;
+let values = [];
+
+if (role === "admin") {
+
+    sql = `
+    SELECT m.*
+    FROM maintenance_records m
+    JOIN vehicles v
+    ON m.vehicle_id = v.vehicle_id
+    `;
+
+} else {
+
+    sql = `
+    SELECT m.*
+    FROM maintenance_records m
+    JOIN vehicles v
+    ON m.vehicle_id = v.vehicle_id
+    WHERE v.user_id = ?
+    `;
+
+    values = [userId];
+}
+
+db.query(sql, values, (err, results) => {
 
             if(err){
                 return res.send("Error");
@@ -38,6 +59,9 @@ WHERE v.user_id = ?`,
 <div class="card">
 
 <h1>🛠 Maintenance Records</h1>
+<p style="text-align:center;">
+Logged in as: <b>${role.toUpperCase()}</b>
+</p>
 
 `;
 
