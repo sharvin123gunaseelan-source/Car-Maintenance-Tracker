@@ -6,7 +6,14 @@ const db = require("../config/db");
 router.get("/vehicles", (req, res) => {
 
     const userId = req.session.userId;
-    const role = req.session.role;
+    const role = req.session.role || "NO_ROLE";
+
+return res.send(`
+<h1>Debug</h1>
+
+<p>User ID: ${req.session.userId}</p>
+<p>Role: ${role}</p>
+`);
 
 console.log("User ID:", req.session.userId);
 console.log("Role:", req.session.role);
