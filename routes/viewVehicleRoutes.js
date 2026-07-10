@@ -6,21 +6,17 @@ const db = require("../config/db");
 router.get("/vehicles", (req, res) => {
 
     const userId = req.session.userId;
-const role = req.session.role;
+    const role = req.session.role;
 
-let sql;
-let values = [];
+    let sql;
+    let values = [];
 
-if (role === "admin") {
-
-    sql = "SELECT * FROM vehicles";
-
-} else {
-
-    sql = "SELECT * FROM vehicles WHERE user_id = ?";
-    values = [userId];
-
-}
+    if (role === "admin") {
+        sql = "SELECT * FROM vehicles";
+    } else {
+        sql = "SELECT * FROM vehicles WHERE user_id = ?";
+        values = [userId];
+    }
 
 db.query(sql, values, (err, results) => {
 

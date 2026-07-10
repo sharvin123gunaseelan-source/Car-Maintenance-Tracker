@@ -43,7 +43,7 @@ VALUES (?,?,?,?)`;
 
         db.query(
             sql,
-            [name,email,hashedPassword,'user'],
+            [name,email,hashedPassword,"user"],
             (err,result)=>{
 
                 if(err){
