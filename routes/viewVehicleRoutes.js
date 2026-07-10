@@ -6,29 +6,33 @@ const db = require("../config/db");
 router.get("/vehicles", (req, res) => {
 
     const userId = req.session.userId;
-    const role = req.session.role || "NO_ROLE";
 
-return res.send(`
-<h1>Debug</h1>
+db.query(
+"SELECT role FROM users WHERE id = ?",
+[userId],
+(err,user)=>{
 
-<p>User ID: ${req.session.userId}</p>
-<p>Role: ${role}</p>
-`);
+    if(err){
+        return res.send("Error");
+    }
 
-console.log("User ID:", req.session.userId);
-console.log("Role:", req.session.role);
+    const role = user[0].role;
 
     let sql;
     let values = [];
 
-    if (role === "admin") {
+    if(role === "admin"){
+
         sql = "SELECT * FROM vehicles";
-    } else {
+
+    }else{
+
         sql = "SELECT * FROM vehicles WHERE user_id = ?";
         values = [userId];
+
     }
 
-db.query(sql, values, (err, results) => {
+    db.query(sql, values, (err, results) => {
 
         if (err) {
             console.log(err);
@@ -306,4 +310,7 @@ router.get("/searchVehicle", (req, res) => {
     );
 
 });
+
+});
+
 module.exports = router;

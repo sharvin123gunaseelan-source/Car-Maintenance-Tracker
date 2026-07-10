@@ -4,35 +4,46 @@ const db = require("../config/db");
 
 router.get("/maintenance",(req,res)=>{
 
-    const role = req.session.role;
-const userId = req.session.userId;
+    const userId = req.session.userId;
 
-let sql;
-let values = [];
+db.query(
+"SELECT role FROM users WHERE id = ?",
+[userId],
+(err,user)=>{
 
-if (role === "admin") {
+    if(err){
+        return res.send("Error");
+    }
 
-    sql = `
-    SELECT m.*
-    FROM maintenance_records m
-    JOIN vehicles v
-    ON m.vehicle_id = v.vehicle_id
-    `;
+    const role = user[0].role;
 
-} else {
+    let sql;
+    let values = [];
 
-    sql = `
-    SELECT m.*
-    FROM maintenance_records m
-    JOIN vehicles v
-    ON m.vehicle_id = v.vehicle_id
-    WHERE v.user_id = ?
-    `;
+    if(role==="admin"){
 
-    values = [userId];
-}
+        sql=`
+        SELECT m.*
+        FROM maintenance_records m
+        JOIN vehicles v
+        ON m.vehicle_id=v.vehicle_id
+        `;
 
-db.query(sql, values, (err, results) => {
+    }else{
+
+        sql=`
+        SELECT m.*
+        FROM maintenance_records m
+        JOIN vehicles v
+        ON m.vehicle_id=v.vehicle_id
+        WHERE v.user_id=?
+        `;
+
+        values=[userId];
+
+    }
+
+    db.query(sql,values,(err,results)=>{
 
             if(err){
                 return res.send("Error");
@@ -189,4 +200,7 @@ router.get("/deleteMaintenance/:id",(req,res)=>{
     );
 
 });
+
+});
+
 module.exports = router;
