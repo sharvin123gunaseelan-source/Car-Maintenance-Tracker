@@ -99,9 +99,9 @@ router.post("/login", (req, res) => {
 
 } else {
 
-            return res.send("Wrong Password");
+    return res.send("Wrong Password");
 
-        }
+}
 
     });
 

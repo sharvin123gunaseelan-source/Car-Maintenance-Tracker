@@ -8,6 +8,9 @@ router.get("/vehicles", (req, res) => {
     const userId = req.session.userId;
     const role = req.session.role;
 
+console.log("User ID:", req.session.userId);
+console.log("Role:", req.session.role);
+
     let sql;
     let values = [];
 
