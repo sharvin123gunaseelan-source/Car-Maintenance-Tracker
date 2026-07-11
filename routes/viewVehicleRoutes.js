@@ -57,7 +57,7 @@ db.query(
 
 <div class="container">
 
-<div class="card" style="width:1200px; overflow-x:auto;">
+<div class="card">
 
 <h1>🚗 Vehicle List</h1>
 <p style="text-align:center;">
